@@ -1,0 +1,35 @@
+# Gradle files
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/build
+
+# Log / OS-specfic files
+.DS_Store
+*.log
+
+# Generated Files
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+output-metadata.json
+
+# Local Properties
+local.properties
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Android Profiling
+*.hprof
