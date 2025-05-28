@@ -17,7 +17,6 @@ class GameViewModel: ViewModel() {
 
 
     fun createPlayer(name: String, startingClass: String ){
-
         val player = when (startingClass){
             "Warrior" -> Player(name, 50,50, 10, 12, 7, null, null)
             "Rouge" -> Player(name, 40, 40, 8, 9, 14, null, null)
