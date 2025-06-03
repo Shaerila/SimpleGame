@@ -41,7 +41,6 @@ fun BattleScreen(
 
     val player = gameViewModel.player.value
     val monster = battleViewModel.monster.value
-//    val monster by battleViewModel.monster.collectAsState()
     val log = battleViewModel.battleLog
 
     // For auto-scrolling of logs in lazy column
@@ -134,6 +133,14 @@ fun BattleScreen(
                     if (player != null) {
                         if (monster != null) {
                             battleViewModel.combat(player, monster)
+
+                            // When combat is finished, change screens based on the result of combat
+                            if (battleViewModel.combatResult == "WIN") {
+                                navController.navigate("battle"){
+                                }
+                            } else {
+                                // Navigate to the your lose screen
+                            }
                         }
                     }
                 }

@@ -15,6 +15,9 @@ class GameViewModel: ViewModel() {
     // means i will need for things like increasing values on level up and damage calculations via combat.
     val player: State<Player?> get() = _player
 
+    // Needed but not sure if set up correctly
+    var battlesWon = 0
+
 
     fun createPlayer(name: String, startingClass: String ){
         val player = when (startingClass){
