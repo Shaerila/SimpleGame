@@ -13,23 +13,29 @@ abstract class Skill(
 }
 
 // Monster Skills
-class RazorEdge : Skill("Razor Edge", 70.0, 'M') {
-    override fun skillProc(player: Player, monster: Monsters): String {
-        monster.speed += (monster.speed * .3).toInt()
-        return("${monster.name} eyes glare with focus. Speed has increased by ${(monster.speed * .4).toInt()}")
+
+
+// Monsters Buffs
+class RazorEdge : Skill("Razor Edge", 50.0, 'M') {
+    override fun skillProc(player: Player, monsters: Monsters): String {
+        monsters.speed += (monsters.speed * .3).toInt()
+        return("${monsters.name} eyes glare with focus. Speed has increased by ${(monsters.speed * .3).toInt()}")
+    }
+}
+// Monsters Attacks
+class SwiftStrike : Skill("Swift Strike", 15.0, 'M') {
+    override fun skillProc(player: Player, monsters: Monsters): String {
+        player.health -= (monsters.speed * .25).toInt()
+        return("${monsters.name} moves at blinding speed dealing ${player.name} ${monsters.speed * .25} damage ")
     }
 }
 
-// Buffs
-
-// Attacks
-
-// Heals
+// Monster Heals
 
 
 // ----------------------------
 // Player Skills
-class SecondWind : Skill("Second Wind", 75.0, 'C') {
+class SecondWind : Skill("Second Wind", 30.0, 'C') {
     override fun skillProc(player: Player, monsters: Monsters): String {
 
         if ((player.health + (player.maxHealth * .1).toInt()) > player.maxHealth){
@@ -41,7 +47,7 @@ class SecondWind : Skill("Second Wind", 75.0, 'C') {
     }
 }
 
-class SneakAttack: Skill("Sneak Attack", 75.0, 'C'){
+class SneakAttack: Skill("Sneak Attack", 25.0, 'C'){
     override fun skillProc(player: Player, monster: Monsters): String {
         monster.health -= (player.speed * .3).toInt()
         return("${player.name} caught ${monster.name} by surprise dealing ${(player.speed * .3).toInt()} damage!")

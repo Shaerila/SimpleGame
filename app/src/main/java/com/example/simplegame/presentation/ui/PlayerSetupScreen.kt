@@ -1,5 +1,6 @@
 package com.example.simplegame.presentation.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,9 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlayerSetupScreen(onStartGame: (String, String) -> Unit) {
+
+    BackHandler(enabled = true) {}
+
     var playerName by remember { mutableStateOf("") }
     var selectedCharacter by remember { mutableStateOf("Warrior") }
     val characterOptions = listOf("Warrior", "Rogue", "Classless")

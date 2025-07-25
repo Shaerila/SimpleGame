@@ -1,5 +1,7 @@
 package com.example.simplegame.presentation.nav
 
+import androidx.activity.compose.BackHandler
+import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.example.simplegame.presentation.viewmodel.GameViewModel
@@ -10,7 +12,13 @@ fun PostBattleEvent(
     navController: NavController
     ) {
 
+    BackHandler(enabled = true) {}
+
     val navController = NavController
+
+//    Button() {
+//
+//    }
 
 
 }

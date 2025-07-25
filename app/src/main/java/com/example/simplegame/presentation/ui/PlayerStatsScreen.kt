@@ -1,5 +1,6 @@
 package com.example.simplegame.presentation.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +24,8 @@ fun PlayerStatsScreen(player: Player?, onBack: () -> Unit, navController: NavCon
         Text("Player Data Not Found")
         return
     }
+
+    BackHandler(enabled = true) {}
 
 
     Column(

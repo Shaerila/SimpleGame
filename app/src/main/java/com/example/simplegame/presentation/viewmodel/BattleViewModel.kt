@@ -10,6 +10,7 @@ import com.example.simplegame.domain.model.Player
 import com.example.simplegame.domain.model.SecondWind
 import com.example.simplegame.domain.model.SneakAttack
 import com.example.simplegame.domain.usecase.GetRandomMonsterByRarityUseCase
+import com.example.simplegame.domain.usecase.RandomNumberGenerator
 import com.example.simplegame.presentation.nav.PostBattleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,6 +38,8 @@ class BattleViewModel constructor(
 
 
     fun startBattle(player: Player, rarity: Char) {
+        _battleLog.clear()
+
         val newMonster = getRandomMonsterByRarity(rarity)
         _monster.value = newMonster
 
@@ -50,24 +53,24 @@ class BattleViewModel constructor(
 
     }
 
-    // Currently combat still continues and makes for weird interation with hp.
-    fun combat(player: Player, monster: Monsters){
+    // Currently combat still continues and makes for weird interaction with hp.
+    fun combat(player: Player, monster: Monsters) {
         val m = _monster.value ?: return
 
         var battleResult: String = ""
 
-        if (player.speed > monster.speed){
+        if (player.speed > monster.speed) {
             playerAttack(player)
-            if (m.health > 0){
+            if (m.health > 0) {
                 monsterAttack(player)
             } else {
                 battleResult = "WIN"
             }
         } else {
             monsterAttack(player)
-            if (player.health > 0){
+            if (player.health > 0) {
                 playerAttack(player)
-                if ( m.health <= 0) {
+                if (m.health <= 0) {
                     battleResult = "WIN"
                     GameViewModel().battlesWon += 1
                 }
@@ -89,7 +92,9 @@ class BattleViewModel constructor(
         _battleLog.add("${player.name} attacks ${monster.name} for ${damage - monsterBlock} damage!")
 
         // The skill usage for skills 1 and 2
-        if (player.skill1 != null && Random.nextDouble(0.0, 100.0) <= (player.skill1?.procRate ?: 0.0)){
+        if (player.skill1 != null && Random.nextDouble(0.0, 100.0) <= (player.skill1?.procRate
+                ?: 0.0)
+        ) {
             player?.let {
 //                it.skill1?.skillProc(player, monster)
                 val usedSkill = it.skill1?.skillProc(player, monster)
@@ -98,7 +103,9 @@ class BattleViewModel constructor(
                 }
             }
         }
-        if (player.skill2 != null && Random.nextDouble(0.0, 100.0) <= (player.skill2?.procRate ?: 0.0)){
+        if (player.skill2 != null && Random.nextDouble(0.0, 100.0) <= (player.skill2?.procRate
+                ?: 0.0)
+        ) {
             player?.let {
                 val usedSkill = it.skill2?.skillProc(player, monster)
                 if (usedSkill != null) {
@@ -107,8 +114,12 @@ class BattleViewModel constructor(
             }
         }
 
-        // Updates the numbers on screens for Monsters. Needed to trigger the "?livedata?" to update
+        /* Updates the numbers on screens for Monsters. Needed to trigger the "?livedata?" to update
         // in viewmodel so it can update the screen.
+
+        We should probably find a better way to trigger recomposition here to update the monsters
+        when they update to screen.
+        */
         val updated = Monsters(
             name = monster.name,
             health = monster.health,
@@ -121,7 +132,7 @@ class BattleViewModel constructor(
             skill1 = monster.skill1,
             skill2 = monster.skill2,
 
-        )
+            )
         _monster.value = updated
 
         if (monster.health <= 0) {
@@ -135,14 +146,21 @@ class BattleViewModel constructor(
 
     private fun monsterAttack(player: Player) {
         val m = _monster.value ?: return
-        val damage = m.strength + (m.weapon?.strength ?: 0)
+        var damage = m.strength + (m.weapon?.strength ?: 0)
         val playerBlock = Random.nextInt((player.defense / 2).toInt(), player.defense)
-        player.health -= (damage - playerBlock)
+        if ((damage - playerBlock) <= 0) {
+            damage = 0
+            _battleLog.add("${m.name} strikes but ${player.name} completely blocks that damage!")
+        } else {
+            player.health -= (damage - playerBlock)
+            _battleLog.add("${m.name} strikes for ${damage - playerBlock} damage!")
+        }
 
 
-        _battleLog.add("${m.name} strikes for ${damage - playerBlock} damage!")
 
-        if (m.skill1 != null && Random.nextDouble(0.0, 100.0) <= (m.skill1?.procRate ?: 0.0)){
+
+
+        if (m.skill1 != null && Random.nextDouble(0.0, 100.0) <= (m.skill1?.procRate ?: 0.0)) {
             m?.let {
                 val usedSkill = it.skill1?.skillProc(player, m)
                 if (usedSkill != null) {
@@ -150,7 +168,7 @@ class BattleViewModel constructor(
                 }
             }
         }
-        if (m.skill2 != null && Random.nextDouble(0.0, 100.0) <= (m.skill2?.procRate ?: 0.0)){
+        if (m.skill2 != null && Random.nextDouble(0.0, 100.0) <= (m.skill2?.procRate ?: 0.0)) {
             m?.let {
                 val usedSkill = it.skill2?.skillProc(player, m)
                 if (usedSkill != null) {
@@ -164,5 +182,27 @@ class BattleViewModel constructor(
         } else {
 //            monsterAttack(player)
         }
+    }
+
+    fun levelUp(player: Player) {
+
+        val maxHealthIncrease = RandomNumberGenerator().randomNumberTo5()
+        val strengthIncrease = RandomNumberGenerator().randomNumberTo3()
+        val defenseIncrease = RandomNumberGenerator().randomNumberTo3()
+        val speedIncrease = RandomNumberGenerator().randomNumberTo3()
+
+
+        player.maxHealth += maxHealthIncrease
+        player.strength += strengthIncrease
+        player.defense += defenseIncrease
+        player.speed += speedIncrease
+
+
+        _battleLog.add("${player.name} has grown from their battle!")
+        _battleLog.add("${player.name} max health has increased by $maxHealthIncrease")
+        _battleLog.add("${player.name} strength has increased by $strengthIncrease")
+        _battleLog.add("${player.name} defense has increased by $defenseIncrease")
+        _battleLog.add("${player.name} speed has increased by $speedIncrease")
+
     }
 }
