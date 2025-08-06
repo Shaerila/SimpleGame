@@ -30,7 +30,7 @@ fun PlayerSetupScreen(onStartGame: (String, String) -> Unit) {
 
     var playerName by remember { mutableStateOf("") }
     var selectedCharacter by remember { mutableStateOf("Warrior") }
-    val characterOptions = listOf("Warrior", "Rogue", "Classless")
+    val characterOptions = listOf("Warrior", "Rogue", "Knight", "Classless")
 
     Column(
         modifier = Modifier
@@ -64,7 +64,8 @@ fun PlayerSetupScreen(onStartGame: (String, String) -> Unit) {
             onClick = { onStartGame(playerName, selectedCharacter) },
             enabled = playerName.isNotBlank()
         ) {
-            Text("View Class Stats")
+            Text(text = "View Class Stats",
+                maxLines = 1)
             // Add Navigation To Stats Screen
 
         }

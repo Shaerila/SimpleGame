@@ -2,6 +2,7 @@ package com.example.simplegame.domain.model
 
 class Player (
 
+
     name: String,
     health: Int,
     maxHealth: Int,

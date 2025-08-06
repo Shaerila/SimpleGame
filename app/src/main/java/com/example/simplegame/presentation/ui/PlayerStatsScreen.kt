@@ -27,7 +27,6 @@ fun PlayerStatsScreen(player: Player?, onBack: () -> Unit, navController: NavCon
 
     BackHandler(enabled = true) {}
 
-
     Column(
         modifier = Modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -60,24 +59,26 @@ fun PlayerStatsScreen(player: Player?, onBack: () -> Unit, navController: NavCon
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
+            Column {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onBack
+                ) {
+                    Text("Back To Class Select")
+                }
 
-            Button(
-                modifier = Modifier.fillMaxWidth(0.5F),
-                onClick = onBack
-            ) {
-                Text("Back To Class Select")
+                Spacer(Modifier.height(8.dp))
+
+                Button(
+                    // A little confused as to why doing this max width gives half the row instead of using
+                    // 0.5F
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { navController.navigate("startEquipWeapon") }
+                ) {
+                    Text("Lock It In!")
+                }
             }
 
-            Spacer(Modifier.width(4.dp))
-
-            Button(
-                // A little confused as to why doing this max width gives half the row instead of using
-                // 0.5F
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { navController.navigate("battle") }
-            ) {
-                Text("Start The Battle")
-            }
         }
     }
 }

@@ -8,10 +8,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.simplegame.data.repo.MonsterRepositoryImpl
-import com.example.simplegame.presentation.viewmodel.GameViewModel
-import com.example.simplegame.domain.usecase.GetRandomMonsterByRarityUseCase
-import com.example.simplegame.domain.usecase.RandomNumberGenerator
+import com.example.simplegame.viewmodel.GameViewModel
+import com.example.simplegame.application.usecase.GetRandomMonsterByRarityUseCase
+import com.example.simplegame.application.usecase.RandomNumberGenerator
 import com.example.simplegame.presentation.ui.BattleScreen
+import com.example.simplegame.presentation.ui.EquipStartSkill
+import com.example.simplegame.presentation.ui.EquipStartWeapon
 import com.example.simplegame.presentation.ui.PlayerSetupScreen
 import com.example.simplegame.presentation.ui.PlayerStatsScreen
 
@@ -25,10 +27,12 @@ class MainActivity : ComponentActivity() {
     val monsterRepo = MonsterRepositoryImpl()
     val getRandomMonsterByRarity = GetRandomMonsterByRarityUseCase(monsterRepo)
 
+    val gameViewModel: GameViewModel by viewModels()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val gameViewModel: GameViewModel by viewModels()
 
 
             val navController = rememberNavController()
@@ -58,10 +62,20 @@ class MainActivity : ComponentActivity() {
                         navController
                     )
                 }
-                if ( RandomNumberGenerator().randomNumberTo10() >= 5 ){
+                composable("startEquipSkill") {
+                    EquipStartSkill(
+                        player = gameViewModel.player.value,
+                        gameViewModel,
+                        navController
+                    )
+                }
 
-                } else {
-
+                composable("startEquipWeapon") {
+                    EquipStartWeapon(
+                        player = gameViewModel.player.value,
+                        gameViewModel,
+                        navController
+                    )
                 }
             }
         }
