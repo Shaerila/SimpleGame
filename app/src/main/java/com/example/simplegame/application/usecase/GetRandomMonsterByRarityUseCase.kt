@@ -1,7 +1,7 @@
 package com.example.simplegame.application.usecase
 
 import com.example.simplegame.domain.model.Monsters
-import com.example.simplegame.domain.repo.MonsterRepository
+import com.example.simplegame.data.repo.MonsterRepository
 
 class GetRandomMonsterByRarityUseCase(
     private val repository: MonsterRepository

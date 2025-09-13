@@ -13,5 +13,13 @@ open class Creature(
     var skill1: Skill? = null,
     var skill2: Skill? = null,
 
-)
+) {
+    /*
+    Status(Type, Duration, Strength)
+        Type: The status aliment itself (Brn, Prz, Frn, Confuse,)
+        Duration: Amount of time it will last
+        Strength: The
+     */
+
+}
 

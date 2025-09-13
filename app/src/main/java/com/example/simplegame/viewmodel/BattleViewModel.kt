@@ -10,20 +10,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.simplegame.R
 import com.example.simplegame.domain.model.Monsters
 import com.example.simplegame.domain.model.Player
-import com.example.simplegame.domain.model.SecondWind
-import com.example.simplegame.domain.model.SneakAttack
 import com.example.simplegame.application.usecase.GetRandomMonsterByRarityUseCase
 import com.example.simplegame.application.usecase.RandomNumberGenerator
-import com.example.simplegame.domain.model.Dagger
-import com.example.simplegame.domain.model.ShortSword
-import com.example.simplegame.domain.model.SwordAndWoodenShield
-import dagger.hilt.android.internal.Contexts.getApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -220,7 +213,7 @@ class BattleViewModel (
 
         if (player.health <= 0) {
             player.health = 0
-            _battleLog.add("${m.name} has defeated ${player.name}!")
+            _battleLog.add("${m.name} has defeated you!")
             stopBattleMusic()
             gameViewModel.playerAlive = false
 

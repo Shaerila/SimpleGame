@@ -79,9 +79,11 @@ dependencies {
     implementation("androidx.navigation:navigation-common-ktx:2.7.7")
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.7")
 
-
     // ViewModel support
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+//    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.1")
+//    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.1")
+
 
     //Testing
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")

@@ -27,7 +27,7 @@ class RustyDagger: Weapon(
 )
 
 
-// Rarity D Class
+// Rarity D Class ( Stats of '9 point' )
 class SwordAndWoodenShield: Weapon(
     "Sword And Wooden Shield",
     4,
@@ -39,16 +39,16 @@ class SwordAndWoodenShield: Weapon(
 class ShortSword: Weapon(
     "Short Sword",
     6,
-    1,
     2,
+    1,
     'D'
 )
 
 class LongSword: Weapon(
     "Long Sword",
-    8,
+    7,
     1,
-    0,
+    1,
     'D'
 )
 
@@ -61,25 +61,25 @@ class Dagger: Weapon(
 )
 class Club: Weapon(
     "Club",
-    strength = 5,
-    defense = 0,
-    speed = 2,
+    strength = 6,
+    defense = 3,
+    speed = 0,
     'D'
 )
 
 
-// Rarity C Class
+// Rarity C Class ( Stats of '18 point' )
 class SteelSword: Weapon(
     "Steel Sword",
+    9,
     5,
-    0,
-    1,
+    4,
     'D'
 )
 
 class GreatSword: Weapon(
     "Great Sword",
-    16,
+    15,
     3,
     0,
     'C'
@@ -87,19 +87,19 @@ class GreatSword: Weapon(
 
 class DualDaggers: Weapon(
     "Dual Daggers",
-    9,
+    7,
     0,
-    12,
+    11,
     'C'
 )
 
 class SwordAndShield: Weapon(
     "Sword and Shield",
-    strength = 12,
+    strength = 10,
     defense = 8,
-    speed = 2,
+    speed = 0,
     'C'
 )
-// Rarity B Class
+// Rarity B Class ( Stats of '30 point' )
 
-//Rarity A Class
+//Rarity A Class ( Stats of '50 point' )

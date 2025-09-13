@@ -13,8 +13,8 @@ fun PostBattleEvent(
 
     BackHandler(enabled = true) {}
 
-    val navController = NavController
 
+    navController.navigate("batt")
 //    Button() {
 //
 //    }

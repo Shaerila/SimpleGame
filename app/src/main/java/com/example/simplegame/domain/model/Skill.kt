@@ -17,7 +17,7 @@ abstract class Skill(
 
 
 // Monsters Buffs
-class RazorEdge : Skill("Razor Edge", 40.0, 'M') {
+class RazorEdge: Skill("Razor Edge", 40.0, 'M') {
     override fun skillProc(player: Player, monsters: Monsters): String {
         monsters.speed += (monsters.speed.plus(monsters.weapon?.speed ?: 0) * .3).toInt()
         return("${monsters.name} eyes glare with focus. Speed has increased " +
@@ -25,7 +25,7 @@ class RazorEdge : Skill("Razor Edge", 40.0, 'M') {
     }
 }
 
-class DivideToGrow : Skill("Divide To Grow", 10.0, 'M') {
+class DivideToGrow: Skill("Divide To Grow", 10.0, 'M') {
     override fun skillProc(player: Player, monsters: Monsters): String {
         monsters.maxHealth *= 2
         monsters.health *= 2
@@ -37,10 +37,10 @@ class DivideToGrow : Skill("Divide To Grow", 10.0, 'M') {
     }
 }
 
-class GhostForm : Skill("Ghost Form", 100.0, 'M') {
+class GhostForm: Skill("Ghost Form", 100.0, 'M') {
     override fun skillProc(player: Player, monsters: Monsters): String {
 
-        if (RandomNumberGenerator().randomNumberTo10() >= 5){
+        if (RandomNumberGenerator().randomNumberTo10() >= 6){
             monsters.defense = 1000
             return("${monsters.name} seems to be in its ghostly form making it impossible to hit!")
 
@@ -51,7 +51,7 @@ class GhostForm : Skill("Ghost Form", 100.0, 'M') {
     }
 }
 
-class Confession : Skill("Confession", 100.0, 'M') {
+class Confession: Skill("Confession", 100.0, 'M') {
     override fun skillProc(player: Player, monsters: Monsters): String {
 
         monsters.strength *= 2
@@ -62,14 +62,14 @@ class Confession : Skill("Confession", 100.0, 'M') {
 }
 
 // Monsters Attacks
-class SwiftStrike : Skill("Swift Strike", 40.0, 'M') {
+class SwiftStrike: Skill("Swift Strike", 40.0, 'M') {
     override fun skillProc(player: Player, monsters: Monsters): String {
         player.health -= (monsters.speed.plus(monsters.weapon?.speed ?: 0) * .25).toInt()
         return("${monsters.name} moves at blinding speed dealing ${(monsters.speed.plus(monsters.weapon?.speed ?: 0) * .25).toInt()} damage ")
     }
 }
 
-class Clobber : Skill("SLAM", 15.0, 'M') {
+class Clobber: Skill("SLAM", 15.0, 'M') {
     override fun skillProc(player: Player, monsters: Monsters): String {
         player.health -= (monsters.strength.plus(monsters.weapon?.strength ?: 0) * .50).toInt()
         return("${monsters.name} takes there ${monsters.weapon?.name} with both hand and SLAMS it into" +
@@ -81,15 +81,15 @@ class Clobber : Skill("SLAM", 15.0, 'M') {
 
 
 // Monster Heals
-class EtherealWail : Skill("Ethereal Wail", 30.0, 'M') {
+class EtherealWail: Skill("Ethereal Wail", 30.0, 'M') {
     override fun skillProc(player: Player, monsters: Monsters): String {
         player.health -= (monsters.strength * .35).toInt()
         //(???) Think about adding a function that checks if hp healed goes over hp max
 
-        if ((monsters.health + (monsters.maxHealth * .35).toInt()) > monsters.maxHealth){
+        if ((monsters.health + (monsters.strength * .35).toInt()) > monsters.maxHealth){
             monsters.health = monsters.maxHealth
         } else {
-            monsters.health += (monsters.maxHealth * .35).toInt()
+            monsters.health += (monsters.strength * .35).toInt()
         }
         return("${monsters.name} lets out a ghastly wail! It saps your of their strength dealing " +
                 "and healing ${monsters.strength * .35} damage!")
@@ -101,7 +101,7 @@ class EtherealWail : Skill("Ethereal Wail", 30.0, 'M') {
 
 // ----------------------------
 // Player Skills
-class SecondWind : Skill("Second Wind", 20.0, 'C') {
+class SecondWind: Skill("Second Wind", 20.0, 'C') {
     override fun skillProc(player: Player, monsters: Monsters): String {
 
         if ((player.health + (player.maxHealth * .1).toInt()) > player.maxHealth){

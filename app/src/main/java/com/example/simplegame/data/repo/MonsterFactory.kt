@@ -2,17 +2,6 @@ package com.example.simplegame.data.repo
 
 import com.example.simplegame.domain.model.*
 
-
-//import com.example.simplegame.domain.model.Clobber
-//import com.example.simplegame.domain.model.Club
-//import com.example.simplegame.domain.model.MangledClaws
-//import com.example.simplegame.domain.model.Monsters
-//import com.example.simplegame.domain.model.RazorEdge
-//import com.example.simplegame.domain.model.RustyDagger
-//import com.example.simplegame.domain.model.ShortSword
-//import com.example.simplegame.domain.model.SwiftStrike
-//import com.example.simplegame.domain.model.SwordAndShield
-
 object MonsterFactory {
 
 // Here we are creating a function that the MonsterFactory can call to make instances of our monsters
@@ -127,7 +116,7 @@ object MonsterFactory {
         maxHealth = 40,
         strength = 20,
         defense = 10,
-        speed = 24,
+        speed = 26,
         rarity = 'C',
 
         weapon = null,
